@@ -2,8 +2,17 @@ import sys
 import os
 
 def main(fp):
+    passphrases = []
     for line in fp:
         line = line.strip()
+        passphrases.append(line.split())
+
+    count = 0
+    for phrase in passphrases:
+        if len(phrase) == len(set(phrase)):
+            count += 1
+    return count
+
 
 
 

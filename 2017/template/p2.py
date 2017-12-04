@@ -13,8 +13,8 @@ if __name__ == "__main__":
     print "=== Part {0} ===".format(part)
     print "=== Test ==="
     with open("sample{0}.txt".format(part), "r") as file:
-        main(file)
+        print main(file)
 
     print "=== Real ==="
     with open("input{0}.txt".format(part), "r") as file:
-        main(file)
+        print main(file)
