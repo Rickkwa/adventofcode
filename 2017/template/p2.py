@@ -1,9 +1,13 @@
 import sys
 import os
+import math
+sys.path.append('../../lib')
+from aoc import *
 
-def main(fp):
-    for line in fp:
-        line = line.strip()
+
+def main(inp):
+    for line in inp:
+        pass
 
 
 
@@ -12,9 +16,7 @@ if __name__ == "__main__":
 
     print "=== Part {0} ===".format(part)
     print "=== Test ==="
-    with open("sample{0}.txt".format(part), "r") as file:
-        print main(file)
+    print main(read_lines("sample{0}.txt".format(part)))
 
     print "=== Real ==="
-    with open("input{0}.txt".format(part), "r") as file:
-        print main(file)
+    print main(read_lines("input{0}.txt".format(part)))
