@@ -21,3 +21,39 @@ def read_int_list(filepath):
     with open(filepath, "r") as file:
         return map(lambda s: int(s.strip()), file.readlines())
 
+
+class Node(object):
+    def __init__(self, name):
+        self.name = name
+        self.parent = None
+        self.children = []
+
+    def __iter__(self):
+        for child in self.children:
+            yield child
+
+    def __str__(self):
+        return str(self.name)
+
+    def children(self):
+        return self.children
+
+    def parent(self):
+        return self.parent
+
+    def add(self, node):
+        self.children.append(node)
+        node.parent = self
+
+    def is_leaf(self):
+        return len(self.children) == 0
+
+    def nested_str(self):
+        result = ""
+        q = [(self, 0)]
+        while len(q) > 0:
+            node, level = q.pop()
+            result += "\n{0}{1}".format("-" * (level * 2), str(node))
+            for child in node:
+                q.append((child, level + 1))
+        return result.strip()
