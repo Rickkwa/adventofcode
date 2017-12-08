@@ -4,19 +4,6 @@ import math
 sys.path.append('../../lib')
 from aoc import *
 
-def do_conditional(a, b, op):
-    if op == "==":
-        return a == b
-    elif op == ">":
-        return a > b
-    elif op == "<":
-        return a < b
-    elif op == ">=":
-        return a >= b
-    elif op == "<=":
-        return a <= b
-    elif op == "!=":
-        return a != b
 
 def main(inp):
     registers = {}
@@ -24,7 +11,7 @@ def main(inp):
         registers[words[0]] = 0
 
     for words in inp:
-        if do_conditional(registers.get(words[4], 0), int(words[6]), words[5]):
+        if eval("{0} {1} {2}".format(str(registers.get(words[4], 0)), words[5], words[6])):
             if words[1] == "inc":
                 registers[words[0]] += int(words[2])
             elif words[1] == "dec":
