@@ -8,9 +8,9 @@ from aoc import *
 def main(inp):
     candidate = {}
     for line in inp:
+        parent = line[0]
+        candidate[parent] = candidate.get(parent, 0)
         if "->" in line:
-            parent = line[0].split()[0]
-            candidate[parent] = candidate.get(parent, 0)
             children = map(lambda x: x.strip(","), line[line.index("->") + 1:])
             for c in children:
                 candidate[c] = candidate.get(c, 0) + 1
