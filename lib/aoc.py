@@ -28,12 +28,21 @@ class Node(object):
         self.parent = None
         self.children = []
 
+    def __getitem__(self, index):
+        return self.children[index]
+
     def __iter__(self):
         for child in self.children:
             yield child
 
     def __str__(self):
         return str(self.name)
+
+    def __contains__(self, node):
+        return node in self.children
+
+    def contains_name(self, name):
+        return name in map(lambda n: n.name, self.children)
 
     def children(self):
         return self.children
@@ -44,6 +53,9 @@ class Node(object):
     def add(self, node):
         self.children.append(node)
         node.parent = self
+
+    def append(self, node):
+        self.add(node)
 
     def is_leaf(self):
         return len(self.children) == 0
