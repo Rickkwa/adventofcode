@@ -13,8 +13,7 @@ def process(lst, start_index, length):
     result = lst[:]
     index = start_index
     for i in range(length):
-        if i < len(sub_list):
-            result[index % len(result)] = sub_list[i]
+        result[index % len(result)] = sub_list[i]
         index += 1
     return result
 
