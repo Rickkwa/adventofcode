@@ -21,4 +21,4 @@ if __name__ == "__main__":
     print main(read_lines("sample{0}.txt".format(part)))
 
     print "=== Real ==="
-    print main(read_lines("input.txt".format(part)))
+    print main(read_lines("input.txt"))
