@@ -25,7 +25,7 @@ def get_dense(sparse):
     return result
 
 
-def do_hash(keystr, list_size):
+def do_hash(keystr, list_size=256):
     cur_pos = 0
     skip_size = 0
 
