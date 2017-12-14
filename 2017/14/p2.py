@@ -5,41 +5,41 @@ sys.path.append('../../lib')
 from aoc import *
 
 # Day 10 part 2 stuff
-def process(lst, start_index, length):
-    tmp_lst = lst[:] * ((length + start_index) / len(lst) + 1)
-    sub_list = tmp_lst[start_index:start_index + length]
-    sub_list.reverse()
+# def process(lst, start_index, length):
+#     tmp_lst = lst[:] * ((length + start_index) / len(lst) + 1)
+#     sub_list = tmp_lst[start_index:start_index + length]
+#     sub_list.reverse()
 
-    result = lst[:]
-    index = start_index
-    for i in range(length):
-        result[index % len(result)] = sub_list[i]
-        index += 1
-    return result
-
-
-def get_dense(sparse):
-    result = []
-    for i in range(len(sparse) / 16):
-        result.append(reduce(lambda x, y: x ^ y, sparse[i * 16: i * 16 + 16]))
-    return result
+#     result = lst[:]
+#     index = start_index
+#     for i in range(length):
+#         result[index % len(result)] = sub_list[i]
+#         index += 1
+#     return result
 
 
-def do_hash(keystr, list_size=256):
-    cur_pos = 0
-    skip_size = 0
+# def get_dense(sparse):
+#     result = []
+#     for i in range(len(sparse) / 16):
+#         result.append(reduce(lambda x, y: x ^ y, sparse[i * 16: i * 16 + 16]))
+#     return result
 
-    sparse = range(0, list_size)
-    for rnd in range(64):
-        for n in map(lambda x: ord(x), list(keystr)) + [17, 31, 73, 47, 23]:
-            n = int(n)
-            sparse = process(sparse, cur_pos, n)
-            cur_pos += n + skip_size
-            cur_pos = cur_pos % list_size
-            skip_size += 1
 
-    dense = get_dense(sparse)
-    return "".join(map(lambda x: format(x, 'x').zfill(2), dense))
+# def do_hash(keystr, list_size=256):
+#     cur_pos = 0
+#     skip_size = 0
+
+#     sparse = range(0, list_size)
+#     for rnd in range(64):
+#         for n in map(lambda x: ord(x), list(keystr)) + [17, 31, 73, 47, 23]:
+#             n = int(n)
+#             sparse = process(sparse, cur_pos, n)
+#             cur_pos += n + skip_size
+#             cur_pos = cur_pos % list_size
+#             skip_size += 1
+
+#     dense = get_dense(sparse)
+#     return "".join(map(lambda x: format(x, 'x').zfill(2), dense))
 
 
 def convert_adjacent_free(disk, row, col):
@@ -84,8 +84,8 @@ def main(keystr):
     disk = []
     for i in range(128):
         key = keystr + "-" + str(i)
-        keyhash = do_hash(key, 256)
-        # binary = list(binascii.unhexlify(keyhash))
+        # keyhash = do_hash(key, 256)
+        keyhash = knot_hash(key)
         binary = list(bin(int(keyhash, 16))[2:].zfill(128))
         disk.append(binary)
         # print len(keyhash)
