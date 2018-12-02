@@ -13,7 +13,7 @@ func readInput() []string {
 	if err != nil {
 		panic(err)
 	}
-	return strings.Split(strings.Trim(string(dat), "\n"), "\n")
+	return strings.Fields(strings.Trim(string(dat), "\n"))
 }
 
 func inArrayInt(x int, xs []int) bool {
