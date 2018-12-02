@@ -20,13 +20,13 @@ func main() {
 	for _, id := range boxIDs {
 		for _, char := range(id) {
 			if strings.Count(id, string(char)) == 2 {
-				countTwos += 1
+				countTwos++
 				break
 			}
 		}
 		for _, char := range(id) {
 			if strings.Count(id, string(char)) == 3 {
-				countThrees += 1
+				countThrees++
 				break
 			}
 		}

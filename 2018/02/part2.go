@@ -17,9 +17,9 @@ func readInput() []string {
 
 func countDifferingCharacters(a string, b string) int {
 	count := 0
-	for index, _ := range a {
+	for index := range a {
 		if a[index] != b[index] {
-			count += 1
+			count++
 		}
 	}
 	return count
@@ -40,7 +40,7 @@ func main() {
 				fmt.Println("First :", id1)
 				fmt.Println("Second:", id2)
 				fmt.Print("Common: ")
-				for index, _ := range id1 {
+				for index := range id1 {
 					if id1[index] == id2[index] {
 						fmt.Print(string(id1[index]))
 					}

@@ -28,7 +28,7 @@ func inArrayInt(x int, xs []int) bool {
 func main() {
 	frequencies := readInput()
 	frequencySum := 0
-	seen := make([]int, 0)
+	var seen []int
 
 	i := 0
 
