@@ -2,6 +2,7 @@ class Board():
     def __init__(self, board_2dlist):
         self.board = board_2dlist
         self.marks = [[0] * len(row) for row in self.board]
+        self.matching_numbers = []
 
 
     def is_winner(self):
@@ -18,6 +19,7 @@ class Board():
             for j in range(len(self.board[i])):
                 if self.board[i][j] == n:
                     self.marks[i][j] = 1
+                    self.matching_numbers.append(n)
 
     def __str__(self):
         result = ''
@@ -38,6 +40,9 @@ class Board():
                 if self.marks[i][j] == 0:
                     result += self.board[i][j]
         return result
+
+    def winning_number(self):
+        return self.matching_numbers[-1]
 
 
 def read_input():
@@ -63,7 +68,6 @@ def read_input():
 
 def get_worst_winner(numbers, boards):
     winners = []
-    winners_n = []
     for n in numbers:
         for board in boards:
             if board in winners:
@@ -71,14 +75,13 @@ def get_worst_winner(numbers, boards):
             board.mark_number(n)
             if board.is_winner():
                 winners.append(board)
-                winners_n.append(n)
-    return winners_n[-1], winners[-1]
+    return winners[-1]
 
 
 
 if __name__ == "__main__":
     call_numbers, bingo_boards = read_input()
-    winning_number, worst_board = get_worst_winner(call_numbers, bingo_boards)
-    print(winning_number)
+    worst_board = get_worst_winner(call_numbers, bingo_boards)
     print(worst_board)
-    print(winning_number * worst_board.sum_unmarked())
+    print(worst_board.winning_number())
+    print(worst_board.sum_unmarked() * worst_board.winning_number())

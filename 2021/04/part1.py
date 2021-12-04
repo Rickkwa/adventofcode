@@ -2,6 +2,7 @@ class Board():
     def __init__(self, board_2dlist):
         self.board = board_2dlist
         self.marks = [[0] * len(row) for row in self.board]
+        self.matching_numbers = []
 
 
     def is_winner(self):
@@ -18,6 +19,7 @@ class Board():
             for j in range(len(self.board[i])):
                 if self.board[i][j] == n:
                     self.marks[i][j] = 1
+                    self.matching_numbers.append(n)
 
     def __str__(self):
         result = ''
@@ -38,6 +40,9 @@ class Board():
                 if self.marks[i][j] == 0:
                     result += self.board[i][j]
         return result
+
+    def winning_number(self):
+        return self.matching_numbers[-1]
 
 
 def read_input():
@@ -66,16 +71,14 @@ def get_winner(numbers, boards):
         for board in boards:
             board.mark_number(n)
             if board.is_winner():
-                return n, board
-    return None, None
+                return board
+    return None
 
 
 
 if __name__ == "__main__":
     call_numbers, bingo_boards = read_input()
-    #print(call_numbers)
-    #print(len(bingo_boards))
-    winning_number, winning_board = get_winner(call_numbers, bingo_boards)
-    print(winning_number)
+    winning_board = get_winner(call_numbers, bingo_boards)
     print(winning_board)
-    print(winning_board.sum_unmarked() * winning_number)
+    print(winning_board.winning_number())
+    print(winning_board.sum_unmarked() * winning_board.winning_number())
