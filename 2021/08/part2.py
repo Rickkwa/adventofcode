@@ -50,33 +50,11 @@ def calculate(signal_patterns, digits) -> int:
                     pass
 
     helper = Helper()
-    answers = [
-        None,
-        list(filter(lambda x: len(x) == 2, signal_patterns))[0],
-        None,
-        None,
-        list(filter(lambda x: len(x) == 4, signal_patterns))[0],
-        None,
-        None,
-        list(filter(lambda x: len(x) == 3, signal_patterns))[0],
-        list(filter(lambda x: len(x) == 7, signal_patterns))[0],
-        None
-    ]
+    answers = [None] * 10
 
     # Set a list of candidate answers for each unknown digit
-    # Start the list based on number of segments required for that digit
-    candidates = [
-        list(filter(lambda x: len(x) == helper.num_of_segs(0), signal_patterns.copy())),
-        [],
-        list(filter(lambda x: len(x) == helper.num_of_segs(2), signal_patterns.copy())),
-        list(filter(lambda x: len(x) == helper.num_of_segs(3), signal_patterns.copy())),
-        [],
-        list(filter(lambda x: len(x) == helper.num_of_segs(5), signal_patterns.copy())),
-        list(filter(lambda x: len(x) == helper.num_of_segs(6), signal_patterns.copy())),
-        [],
-        [],
-        list(filter(lambda x: len(x) == helper.num_of_segs(9), signal_patterns.copy()))
-    ]
+    # Start with all 10 signal_patterns and eliminate all the ones whose length doesn't match the digit
+    candidates = [list(filter(lambda x: len(x) == helper.num_of_segs(i), signal_patterns)) for i in range(10)]
     update_candidates()
 
     for _ in range(100):
